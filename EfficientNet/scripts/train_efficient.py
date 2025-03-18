@@ -22,7 +22,7 @@ for param in model.features[-3:].parameters():  # Fine-tune 3 lớp cuối
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+    transforms.Normalize(mean=[0.43967315554618835, 0.3947981894016266, 0.36026132106781006], std=[0.21060341596603394, 0.19447742402553558, 0.19024626910686493])
 ])
 
 # Load dataset
@@ -34,13 +34,9 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=10, eta_min=1e-6)
 
-# Early Stopping
 minimum_loss = 1000000000
-patience = 75  # Số epoch tối đa không cải thiện trước khi dừng
-counter = 0
-
 # Training loop
-num_epochs = 75
+num_epochs = 100
 for epoch in range(num_epochs):
     model.train()
     running_loss = 0.0
@@ -72,10 +68,5 @@ for epoch in range(num_epochs):
         counter = 0  # Reset nếu có cải thiện
         print("Model updated!")
         torch.save(model.state_dict(), "D:/Models for OAI/EfficientNet/models/best_efficientnet_b2.pth")
-    else:
-        counter += 1
-        if counter >= patience:
-            print("Early stopping triggered!")
-            break
 
 print("Training complete! Model saved as best_efficientnet_b2.pth")

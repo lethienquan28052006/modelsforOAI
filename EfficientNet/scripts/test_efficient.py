@@ -9,7 +9,7 @@ import pandas as pd
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+    transforms.Normalize(mean=[0.43967315554618835, 0.3947981894016266, 0.36026132106781006], std=[0.21060341596603394, 0.19447742402553558, 0.19024626910686493])
 ])
 
 # Load model EfficientNet-B2
