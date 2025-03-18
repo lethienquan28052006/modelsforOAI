@@ -7,4 +7,5 @@ Stacking : Gộp các model lại thành 1 model, theo phương pháp Voting (đ
 TRẠNG THÁI CÁC MODEL : 
 
 Resnet : Đúng 80%
-Mobilenet : Đúng 80%
+Mobilenet : Đúng 81%
+EfficientNet : Đúng 89%
