@@ -67,22 +67,21 @@ def predict(models, weights, dataloader, class_names):
 # Thông số
 TEST_DIR = "./test_data"
 MODEL_PATHS = {
-    "mobilenetv3": "D:/Olympic AI - mobilenet v3/models/mobilenetv3.pth",
-    "resnet18": "D:/Olympic AI 2 - resnet/models/resnet_mushroom.pth",
-    "efficientnet": "D:/Olympic AI 3 - EfficientNet-B0/models/efficientnet_b0_mushroom.pth",
-    "densenet": "D:/Olympic AI - dense net/models/densenet121.pth"
+    "resnet18": "D:/Models for OAI/Resnet/models/resnet_mushroom.pth",
+    "efficientnet": "D:/Models for OAI/EfficientNet/models/best_efficientnet_b2.pth",
+    "densenet": "D:/Models for OAI/DenseNet/models/densenet121_best.pthh"
 }
-BATCH_SIZE = 32
+BATCH_SIZE = 64
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Trọng số của từng mô hình
-weights = [0.2, 0.4, 0.3, 0.1]  # MobileNetV3: 30%, ResNet18: 20%, EfficientNet: 30%, DenseNet: 20%
+weights = [1, 1, 1]  # MobileNetV3: 30%, ResNet18: 20%, EfficientNet: 30%, DenseNet: 20%
 
 # Chuẩn bị dữ liệu
 test_transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+    transforms.Normalize(mean=[0.4397, 0.3948, 0.3603], std=[0.2106, 0.1945, 0.1902])
 ])
 
 test_dataset = ImageDataset(TEST_DIR, transform=test_transform)
@@ -91,7 +90,6 @@ test_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False)
 # Load các mô hình
 num_classes = 4  # Số lớp trong mô hình
 models = [
-    load_model(mobilenet_v3_large, MODEL_PATHS["mobilenetv3"], num_classes),
     load_model(resnet18, MODEL_PATHS["resnet18"], num_classes),
     load_model(efficientnet_b0, MODEL_PATHS["efficientnet"], num_classes),
     load_model(densenet121, MODEL_PATHS["densenet"], num_classes)

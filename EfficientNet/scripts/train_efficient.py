@@ -22,7 +22,7 @@ for param in model.features[-3:].parameters():  # Fine-tune 3 lớp cuối
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.ToTensor(),
-    transforms.Normalize(mean=[0.43967315554618835, 0.3947981894016266, 0.36026132106781006], std=[0.21060341596603394, 0.19447742402553558, 0.19024626910686493])
+    transforms.Normalize(mean=[0.4397, 0.3948, 0.3603], std=[0.2106, 0.1945, 0.1902])
 ])
 
 # Load dataset
